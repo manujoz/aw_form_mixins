@@ -94,12 +94,14 @@ export const AwInputPrefixMixin = superclass => class extends superclass {
 	 * Enmarca los prefixs y los suffixs en el componente.
 	 */
 	_adjustPrefixSuffixs() {
-		if( this.tagName === "AW-INPUT-DF" ) {
+		let input = ( this.inputVisible ) ? this.inputVisible : this.inputElement;
+
+		if( this.tagName.indexOf( "-DF" ) > -1 ) {
 			this.prefixStyles.padding.right += 7;
 			this.prefixStyles.padding.left += 7;
 		}
 		
-		var fontSize = parseInt( window.getComputedStyle( this.inputElement, null ).fontSize.replace( "px", "" ));
+		var fontSize = parseInt( window.getComputedStyle( input, null ).fontSize.replace( "px", "" ));
 		var paddgingTopDf = parseInt( window.getComputedStyle( this.$.container, null ).paddingTop.replace( "px", "" ));
 		
 		for( let i = 0; i < this.prefixs.length; i++ ) {
@@ -119,7 +121,7 @@ export const AwInputPrefixMixin = superclass => class extends superclass {
 
 			// Calculamos la posición del prefix
 
-			var hInput = this.inputElement.offsetHeight;
+			var hInput = input.offsetHeight;
 			var hPrefix = el.offsetHeight;
 			var prefixTop = parseInt( window.getComputedStyle( el, null ).top.replace( "px", "" ));
 
@@ -129,7 +131,7 @@ export const AwInputPrefixMixin = superclass => class extends superclass {
 			// Ajustamos los parámetros.
 
 			this.prefixStyles.padding.left += el.offsetWidth + 2;
-			this.inputElement.style.paddingLeft = this.prefixStyles.padding.left + "px";
+			input.style.paddingLeft = this.prefixStyles.padding.left + "px";
 
 			// Ajustamos el left del label si no es DF.
 
@@ -158,7 +160,7 @@ export const AwInputPrefixMixin = superclass => class extends superclass {
 
 			// Calculamos la posición del prefix
 
-			var hInput = this.inputElement.offsetHeight;
+			var hInput = input.offsetHeight;
 			var hPrefix = el.offsetHeight;
 			var prefixTop = parseInt( window.getComputedStyle( el, null ).top.replace( "px", "" ));
 
@@ -168,7 +170,7 @@ export const AwInputPrefixMixin = superclass => class extends superclass {
 			// Ajustamos los parámetros.
 
 			this.prefixStyles.padding.right += el.offsetWidth + 2;
-			this.inputElement.style.paddingRight = this.prefixStyles.padding.right + "px";
+			input.style.paddingRight = this.prefixStyles.padding.right + "px";
 
 			// Mostramos el prefix
 
