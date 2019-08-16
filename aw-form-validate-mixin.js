@@ -437,11 +437,14 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 		if( input.hasAttribute( "isdate" )) {
 			formato = input.getAttribute( "isdate" );
 		}
+
+		var sFecha = fecha.split( " " );
+		var fechaArr = sFecha[ 0 ].split('-');
+		var horaArr = ( sFecha[ 1 ] ) ? sFecha[ 1 ].split(':') : null;
 		
 		var aho = null;
 		var mes = null;
 		var dia = null;
-		var fechaArr = fecha.split('-');
 		if (formato === "aaaa-mm-dd") {
 			aho = fechaArr[0];
 			mes = fechaArr[1];
@@ -455,6 +458,8 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 			mes = fechaArr[0];
 			dia = fechaArr[1];
 		}
+
+		// Comprobamos la fecha
 		
 		var plantilla = new Date(aho, mes - 1, dia);//mes empieza de cero Enero = 0
 
@@ -462,10 +467,23 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 			input.setAttribute( "errmsg", this.__getMessagesValidate( input, "isdate" ));
 			input.focus();
 			return false;
-		} else {
-			input.setAttribute( "errmsg", "" );
-			return true;
 		}
+
+		// Comprobamos la hora
+
+		if( horaArr ) {
+			var hora = parseInt( horaArr[ 0 ] );
+			var min = parseInt( horaArr[ 1 ] );
+
+			if( hora > 24 || min > 60 ) {
+				input.setAttribute( "errmsg", this.__getMessagesValidate( input, "isdate" ));
+				input.focus();
+				return false;
+			}
+		}
+
+		input.setAttribute( "errmsg", "" );
+		return true;
 	}
 	
 	__validateIsDateprevius( input ) {
@@ -477,11 +495,14 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 		if( input.hasAttribute( "isdate" )) {
 			formato = input.getAttribute( "isdate" );
 		}
+
+		var sFecha = fecha.split( " " );
+		var fechaArr = sFecha[ 0 ].split('-');
+		var horaArr = ( sFecha[ 1 ] ) ? sFecha[ 1 ].split(':') : null;
 		
 		var aho = null;
 		var mes = null;
 		var dia = null;
-		var fechaArr = fecha.split('-');
 		if (formato === "aaaa-mm-dd") {
 			aho = fechaArr[0];
 			mes = fechaArr[1];
