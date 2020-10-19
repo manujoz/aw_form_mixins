@@ -1,0 +1,17 @@
+{
+	"name": "aw_form_mixins",
+	"version": "2.0.2",
+	"description": "Mixins de los formularios Arisman Webs",
+	"keywords": [
+	  	"Arisman Webs"
+	],
+	"author": "Arisman Webs",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/manujoz/aw_form_mixins"
+	},
+	"dependencies": {
+		"aw_polymer_3": "^1.1.0"
+	},
+	"license": "ISC"
+}
