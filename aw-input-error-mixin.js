@@ -3,11 +3,24 @@ import "/node_modules/aw_polymer_3/polymer/polymer-element.js";
 export const AwInputErrorMixin = superclass => class extends superclass {
 	static get properties() {
 		return {
-			error: { type: Boolean, value: false },
-			errmsg: { type: String, value: "" },
-			noerrors: { type: Boolean, value: false },
-			observerErr: { type: Object, value: null }
+			/** Pone el input en modo error */
+			error: { type: Boolean },
+			/** El mensaje de error que se va a mostrar */
+			errmsg: { type: String },
+			/** No se mostrarán los errores */
+			noerrors: { type: Boolean },
 		}
+	}
+
+	constructor() {
+		super();
+
+		this.error = false;
+		this.errmsg = "";
+		this.noerrors = false;
+
+		/** @type {MutationObserver} */
+		this.observerErr = undefined;
 	}
 	
 	/**
