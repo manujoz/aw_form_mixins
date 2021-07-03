@@ -1,14 +1,11 @@
-import "/node_modules/aw_polymer_3/polymer/polymer-element.js";
+import "../aw_polymer_3/polymer/polymer-element.js";
 
 export const AwFormValidateMixin = superclass => class extends superclass {
-	static get properties() {
-		return {
-			validator: {
-				type: Object,
-				value: {
-					messages: null
-				}
-			}
+	constructor() {
+		super();
+
+		this.validator = {
+			messages: {}
 		}
 	}
 
@@ -24,16 +21,8 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 			}
 			
 			// Si hay error de validación
-			
-			if ( errorRule ) {
-				// Si la regla tiene un mensaje
-				
-				if( this.validator.messages && this.validator.messages[ errorRule ] ) {
-					input.setAttribute( "errmsg", this.validator.messages[ input.name ] );
-				}
-				
-				// Devolvemos el error
-				
+			if ( errorRule ) {				
+				// Devolvemos el error				
 				return {
 					error: true,
 					errorRule: errorRule,
@@ -88,8 +77,8 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 		
 		// Validamos si es número
 	   
-		if( input.hasAttribute( "isumber" ) && !this.__validateIsNumber( input )) {
-			return "isumber";
+		if( input.hasAttribute( "isnumber" ) && !this.__validateIsNumber( input )) {
+			return "isnumber";
 		}
 		
 		// Validamos min
@@ -329,7 +318,7 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 		var value = input.value;
 		
 		if( isNaN( value )) {
-			input.setAttribute( "errmsg", this.__getMessagesValidate( input, "isumber" ));
+			input.setAttribute( "errmsg", this.__getMessagesValidate( input, "isnumber" ));
 			input.focus();
 			return false;
 		} else {
@@ -940,7 +929,7 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 		if( rule === "rangelength" ) {
 			return "La longitud debe estar entre " + data[ 0 ] + " y " + data[ 1 ] + " caracteres";
 		}
-		if( rule === "isumber" ) {
+		if( rule === "isnumber" ) {
 			return "El valor introducido debe ser numérico";
 		}
 		if( rule === "min" ) {
@@ -1040,6 +1029,8 @@ export const AwFormValidateMixin = superclass => class extends superclass {
 		
 		valor = valor.replace( "[", "" );
 		valor = valor.replace( "]", "" );
+		valor = valor.replace( new RegExp( "'", 'g' ), "" );
+		valor = valor.replace( new RegExp( '"', 'g' ), "" );
 		valor = valor.replace( new RegExp( " ", 'g' ), "" );
 		valor = valor.split( "," );
 		

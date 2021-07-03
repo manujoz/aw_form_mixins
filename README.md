@@ -281,7 +281,7 @@ Como hemos comentado, por defecto los aw-input no se validan cuando cambian de v
 `novalidate`: Evita cualquier validación, ya sea cuando cambia o cuando se envía un aw-form.
 
 ```html
-<aw-input label="Usuario de twitter" pattern="@([A-Za-z0-9_]{1,15})" novalidate validateonchange=></aw-input>
+<aw-input label="Usuario de twitter" pattern="@([A-Za-z0-9_]{1,15})" novalidate validateonchange></aw-input>
 <aw-input type="email" label="Correo electrónico"></aw-input>
 ```
 ______________________________

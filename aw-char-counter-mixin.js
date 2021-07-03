@@ -3,9 +3,16 @@ import "/node_modules/aw_polymer_3/polymer/polymer-element.js";
 export const AwInputCharCounterMixin = superclass => class extends superclass {
 	static get properties() {
 		return {
-			countchar: { type: Boolean, value: false },
-			countCharStr: { type: String, value: "0" },
+			/** Indica si se debe mostrar el contador de caracteres */
+			countchar: { type: Boolean },
 		}
+	}
+
+	constructor() {
+		super();
+
+		this.countchar = false;
+		this.countCharStr = "0";
 	}
 
 	/**
