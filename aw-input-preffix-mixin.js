@@ -1,4 +1,4 @@
-import "/node_modules/aw_polymer_3/polymer/polymer-element.js";
+import "../aw_polymer_3/polymer/polymer-element.js";
 
 export const AwInputPrefixMixin = superclass => class extends superclass {
 	static get properties() {
